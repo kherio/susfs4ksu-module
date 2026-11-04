@@ -93,28 +93,37 @@ else
 	ui_print "[-] Kernel is using susfs v1.5.2"
 fi
 
+# Solo se aceptan binarios de la nube cuyo sha256 este en trusted_hashes.txt
+TRUSTED_HASHES="${TMPDIR}/susfs/trusted_hashes.txt"
+is_trusted() {
+	_h=$(sha256sum "$1" 2>/dev/null | awk '{print $1}')
+	[ -n "$_h" ] && awk -v h="$_h" '$1==h{f=1} END{exit !f}' "$2" 2>/dev/null
+}
+
 # Check connectivity first
 ui_print "[-] Checking susfs binary cloud connection"
 base_url="https://raw.githubusercontent.com/sidex15/susfs4ksu-binaries/universal-binary/ksu_susfs_arm64"
 if check "$base_url"; then
 	ui_print "[-] susfs binary cloud connection established"
-	# Check the hash of susfs binaries
+	# Download once, then hash and install that same file
 	hash=$(sha256sum ${TMPDIR}/susfs/tools/ksu_susfs_arm64 | awk '{print $1}')
-	cloudhash=$(download https://raw.githubusercontent.com/sidex15/susfs4ksu-binaries/universal-binary/ksu_susfs_arm64 | sha256sum | awk '{print $1}')
-	if [ $hash = $cloudhash > /dev/null 2>&1 ]; then
+	download "$base_url" > ${MODPATH}/ksu_susfs_remote 2>/dev/null
+	cloudhash=$(sha256sum ${MODPATH}/ksu_susfs_remote | awk '{print $1}')
+	if [ "$hash" = "$cloudhash" ]; then
 		ui_print "[-] susfs local and cloud binary hash is the same"
 		ui_print "[-] skipping binary cloud update"
+		cp ${TMPDIR}/susfs/tools/ksu_susfs_arm64 ${DEST_BIN_DIR}/ksu_susfs
+	elif ! is_trusted ${MODPATH}/ksu_susfs_remote "$TRUSTED_HASHES"; then
+		ui_print "[!] Cloud susfs binary is not in trusted_hashes.txt, ignoring it"
+		ui_print "[-] Using local susfs binary for installation"
+		cp ${TMPDIR}/susfs/tools/ksu_susfs_arm64 ${DEST_BIN_DIR}/ksu_susfs
 	else
-		ui_print "[-] Downloading latest susfs binary from the internet"
-		download "https://raw.githubusercontent.com/sidex15/susfs4ksu-binaries/universal-binary/ksu_susfs_arm64" > ${MODPATH}/ksu_susfs_remote
-		# test downloaded binary
+		ui_print "[-] Trusted susfs cloud binary found"
 		chmod +x ${MODPATH}/ksu_susfs_remote
 		if ${MODPATH}/ksu_susfs_remote > /dev/null 2>&1 ; then
-			# test ok
 			ui_print "[-] Downloaded susfs binary is working, using it for installation"
 			cp -f ${MODPATH}/ksu_susfs_remote ${DEST_BIN_DIR}/ksu_susfs
 		else
-			# test failed
 			ui_print "[!] Downloaded susfs binary is not working, using local binary for installation"
 			cp ${TMPDIR}/susfs/tools/ksu_susfs_arm64 ${DEST_BIN_DIR}/ksu_susfs
 		fi

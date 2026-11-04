@@ -40,7 +40,18 @@ jobs:
           mkdir -p dist
           zip -qr "dist/susfs4ksu-${VERSION}-${SHORT}.zip" . \
             -x '.git/*' '.github/*' 'dist/*' 'README.md' 'LICENSE' '.gitignore'
-          unzip -l "dist/susfs4ksu-${VERSION}-${SHORT}.zip" | tail -1
+          cp "dist/susfs4ksu-${VERSION}-${SHORT}.zip" dist/susfs4ksu.zip
+          unzip -l dist/susfs4ksu.zip | tail -1
+
+      - name: Check cloud binary against trusted_hashes.txt
+        run: |
+          curl -fsSL https://raw.githubusercontent.com/sidex15/susfs4ksu-binaries/universal-binary/ksu_susfs_arm64 -o /tmp/ksu_susfs_cloud
+          H=$(sha256sum /tmp/ksu_susfs_cloud | awk '{print $1}')
+          if grep -q "^$H" trusted_hashes.txt; then
+            echo "Cloud binary $H is trusted"
+          else
+            echo "::warning::El binario de la nube ($H) no esta en trusted_hashes.txt; los usuarios no podran actualizarlo hasta que lo revises y lo anadas"
+          fi
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4

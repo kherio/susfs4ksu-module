@@ -1,0 +1,4 @@
+# sha256 de ksu_susfs_arm64 que el modulo acepta al actualizar desde la nube.
+# Un binario descargado cuyo hash no este aqui se ignora y se usa el incluido en tools/.
+# Formato: <sha256> # comentario
+8a626ce3bae27a7bcaa2e7f5f7b91e786ecc57f8e57d19c7856719a89b54b6fa # universal-binary (sidex15/susfs4ksu-binaries), igual que tools/ksu_susfs_arm64

@@ -1,3 +1,10 @@
+## v1.5.2-R28-K1 (kherio fork)
+* module.prop/update.json: updateJson and zipUrl now point to kherio/susfs4ksu-module
+* scripts: cloud ksu_susfs binary is only accepted if its sha256 is listed in trusted_hashes.txt
+* scripts: download the cloud binary once and hash/install that same file (before, it was downloaded twice)
+* scripts: customize now also copies the bundled binary when it matches the cloud one
+* workflow: also publishes a stable `susfs4ksu.zip` asset and warns when the cloud binary is not trusted
+
 ## v1.5.2+ Revision 28
 ### Notes
 Sorry for the very late update. This update focuses on WebUI configuration import/export, boot-stage script performance and correctness fixes, and better handling of newer susfs (v2.0.0+/v2.1.0+) kernel implementations.
