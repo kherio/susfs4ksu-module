@@ -2,38 +2,58 @@ name: Build and Release
 
 on:
   push:
+    branches: ['v1.5.2+']
     paths-ignore:
       - 'README.md'
       - '*.md'
       - 'docs/**'
       - '.github/ISSUE_TEMPLATE/**'
   workflow_dispatch:
+    inputs:
+      release:
+        description: 'Publicar un Release en GitHub'
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
 
 jobs:
-  build-and-release:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout v1.5.2+ branch
+      - name: Checkout
         uses: actions/checkout@v4
-        with:
-          ref: v1.5.2+
 
-      - name: Update version with git HEAD
+      - name: Read module.prop
         run: |
-          RANDOM_STRING=$(git rev-parse --short HEAD | cut -c1-7)
-          echo "BUILD_ID=${RANDOM_STRING}" >> $GITHUB_ENV
-          sed -i "s/version=v1.5.2-R.*/version=v1.5.2-CI-${RANDOM_STRING}/" module.prop
+          VERSION=$(grep '^version=' module.prop | cut -d= -f2)
+          SHORT=$(git rev-parse --short HEAD)
+          echo "VERSION=${VERSION}" >> $GITHUB_ENV
+          echo "SHORT=${SHORT}" >> $GITHUB_ENV
 
-      - name: Upload release artifact
+      - name: Check scripts syntax
+        run: for f in *.sh; do sh -n "$f"; done
+
+      - name: Build zip
+        run: |
+          mkdir -p dist
+          zip -qr "dist/susfs4ksu-${VERSION}-${SHORT}.zip" . \
+            -x '.git/*' '.github/*' 'dist/*' 'README.md' 'LICENSE' '.gitignore'
+          unzip -l "dist/susfs4ksu-${VERSION}-${SHORT}.zip" | tail -1
+
+      - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: release-1.5.2+_${{ env.BUILD_ID }}
-          path: |
-            ${{ github.workspace }}/**/*
-            !${{ github.workspace }}/.git/**
-            !${{ github.workspace }}/.github/**
-            !${{ github.workspace }}/node_modules/**
-            !${{ github.workspace }}/src/**
-            !${{ github.workspace }}/tests/**
-            !${{ github.workspace }}/README.md
-            !${{ github.workspace }}/LICENSE
+          name: susfs4ksu-${{ env.VERSION }}-${{ env.SHORT }}
+          path: dist/*.zip
+
+      - name: Publish release
+        if: github.event_name == 'workflow_dispatch' && inputs.release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create "${VERSION}-${SHORT}" dist/*.zip \
+            --target "${GITHUB_SHA}" \
+            --title "SUSFS4KSU ${VERSION} (${SHORT})" \
+            --notes-file CHANGELOG.md
