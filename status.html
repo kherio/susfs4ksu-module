@@ -4,23 +4,27 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Document</title>
+	<title>SUSFS4KSU</title>
 	<link href="./index.css" type="text/css" rel="stylesheet">
 	<script type="module" src="index.js"></script>
     <script type="module" src="i18n.js"></script>
 </head>
 
-<body class="min-h-screen" data-router-wrapper>
-    <main class="max-h-screen relative overflow-x-clip overflow-y-auto pb-14" data-router-view="credits">
-            <section class="flex flex-col gap-4 items-center justify-center pt-10">  
+<body class="min-h-screen bg-base-100 text-base-content" data-router-wrapper>
+    <main class="max-h-screen relative overflow-x-clip overflow-y-auto pb-20" data-router-view="credits">
+		<header class="mx-auto flex max-w-xl items-center justify-between gap-3 px-4 pt-5 pb-3">
+				<h1 class="text-xl font-semibold tracking-tight" data-i18n="susfs_kernel_status_label">SUSFS Kernel Status</h1>
+			</header>
+			
+            <section class="mx-auto flex max-w-xl flex-col gap-3 px-4">  
                 <!-- Add this section after the kernel uname section and before the closing </section> tag -->
-                <div class="stats flex flex-col bg-cyan-100/20 dark:bg-black/20 mt-5 border-2 border-white backdrop-blur-[2.5px]">
+                <div class="panel flex flex-col">
                     <div class="stat">
-                        <div class="stat-title text-lg text-white mb-3" data-i18n="kernel_features_label">Kernel Features Status</div>
+                        <div class="panel-title" data-i18n="kernel_features_label">Kernel Features Status</div>
                         
                         <!-- SUS Path -->
                         <div class="flex justify-between items-center py-2 px-2">
-                            <span class="text-white text-base" data-i18n="sus_path_feature_label">SUS Path Support</span>
+                            <span class="text-sm" data-i18n="sus_path_feature_label">SUS Path Support</span>
                             <div id="status_sus_path" class="badge badge-warning text-sm ml-4">
                                 <span data-i18n="unknown_label">Unknown</span>
                             </div>
@@ -28,7 +32,7 @@
 
                         <!-- SUS Maps -->
                         <div class="flex justify-between items-center py-2 px-2">
-                            <span class="text-white text-base" data-i18n="sus_map_feature_label">SUS Maps Support</span>
+                            <span class="text-sm" data-i18n="sus_map_feature_label">SUS Maps Support</span>
                             <div id="status_sus_map" class="badge badge-warning text-sm ml-4">
                                 <span data-i18n="unknown_label">Unknown</span>
                             </div>
@@ -36,7 +40,7 @@
                         
                         <!-- SUS Mount -->
                         <div class="flex justify-between items-center py-2 px-2">
-                            <span class="text-white text-base" data-i18n="sus_mount_feature_label">SUS Mount Support</span>
+                            <span class="text-sm" data-i18n="sus_mount_feature_label">SUS Mount Support</span>
                             <div id="status_sus_mount" class="badge badge-warning text-sm ml-4">
                                 <span data-i18n="unknown_label">Unknown</span>
                             </div>
@@ -44,7 +48,7 @@
 
                         <!-- SUS Kstat -->
                         <div class="flex justify-between items-center py-2 px-2">
-                            <span class="text-white text-base" data-i18n="sus_kstat_feature_label">SUS Kstat Support</span>
+                            <span class="text-sm" data-i18n="sus_kstat_feature_label">SUS Kstat Support</span>
                             <div id="status_sus_kstat" class="badge badge-warning text-sm ml-4">
                                 <span data-i18n="unknown_label">Unknown</span>
                             </div>
@@ -52,7 +56,7 @@
 
                         <!-- Try Umount -->
                         <div class="flex justify-between items-center py-2 px-2">
-                            <span class="text-white text-base" data-i18n="try_umount_feature_label">Try Umount Support</span>
+                            <span class="text-sm" data-i18n="try_umount_feature_label">Try Umount Support</span>
                             <div id="status_try_umount" class="badge badge-warning text-sm ml-4">
                                 <span data-i18n="unknown_label">Unknown</span>
                             </div>
@@ -60,7 +64,7 @@
                         
                         <!-- Spoof Uname -->
                         <div class="flex justify-between items-center py-2 px-2">
-                            <span class="text-white text-base" data-i18n="spoof_uname_feature_label">Spoof Uname Support</span>
+                            <span class="text-sm" data-i18n="spoof_uname_feature_label">Spoof Uname Support</span>
                             <div id="status_spoof_uname" class="badge badge-warning text-sm ml-4">
                                 <span data-i18n="unknown_label">Unknown</span>
                             </div>
@@ -68,7 +72,7 @@
                         
                         <!-- Spoof Cmdline -->
                         <div class="flex justify-between items-center py-2 px-2">
-                            <span class="text-white text-base" data-i18n="spoof_cmdline_feature_label">Spoof Cmdline/Bootconfig</span>
+                            <span class="text-sm" data-i18n="spoof_cmdline_feature_label">Spoof Cmdline/Bootconfig</span>
                             <div id="status_spoof_cmdline" class="badge badge-warning text-sm ml-4">
                                 <span data-i18n="unknown_label">Unknown</span>
                             </div>
@@ -76,7 +80,7 @@
 
                         <!-- Open Redirect -->
                         <div class="flex justify-between items-center py-2 px-2">
-                            <span class="text-white text-base" data-i18n="open_redirect_feature_label">Open Redirect Support</span>
+                            <span class="text-sm" data-i18n="open_redirect_feature_label">Open Redirect Support</span>
                             <div id="status_open_redirect" class="badge badge-warning text-sm ml-4">
                                 <span data-i18n="unknown_label">Unknown</span>
                             </div>
@@ -84,7 +88,7 @@
 
                         <!-- Enable Log -->
                         <div class="flex justify-between items-center py-2 px-2">
-                            <span class="text-white text-base" data-i18n="enable_log_feature_label">Logging Support</span>
+                            <span class="text-sm" data-i18n="enable_log_feature_label">Logging Support</span>
                             <div id="status_enable_log" class="badge badge-warning text-sm ml-4">
                                 <span data-i18n="unknown_label">Unknown</span>
                             </div>
@@ -92,7 +96,7 @@
 
                         <!-- Auto Add Default Mount -->
                         <div class="flex justify-between items-center py-2 px-2">
-                            <span class="text-white text-base" data-i18n="auto_default_mount_feature_label">Auto hide Default Mount</span>
+                            <span class="text-sm" data-i18n="auto_default_mount_feature_label">Auto hide Default Mount</span>
                             <div id="status_auto_default_mount" class="badge badge-warning text-sm ml-4">
                                 <span data-i18n="unknown_label">Unknown</span>
                             </div>
@@ -100,7 +104,7 @@
                         
                         <!-- Auto Add Bind Mount -->
                         <div class="flex justify-between items-center py-2 px-2">
-                            <span class="text-white text-base" data-i18n="auto_bind_mount_feature_label">Auto hide Bind Mount</span>
+                            <span class="text-sm" data-i18n="auto_bind_mount_feature_label">Auto hide Bind Mount</span>
                             <div id="status_auto_bind_mount" class="badge badge-warning text-sm ml-4">
                                 <span data-i18n="unknown_label">Unknown</span>
                             </div>
@@ -108,7 +112,7 @@
                         
                         <!-- Auto Try Umount Bind -->
                         <div class="flex justify-between items-center py-2 px-2">
-                            <span class="text-white text-base" data-i18n="auto_try_umount_bind_feature_label">Auto hide Try Umount Bind</span>
+                            <span class="text-sm" data-i18n="auto_try_umount_bind_feature_label">Auto hide Try Umount Bind</span>
                             <div id="status_auto_try_umount_bind" class="badge badge-warning text-sm ml-4">
                                 <span data-i18n="unknown_label">Unknown</span>
                             </div>
@@ -116,7 +120,7 @@
                         
                         <!-- Hide KSU SUSFS Symbols -->
                         <div class="flex justify-between items-center py-2 px-2">
-                            <span class="text-white text-base" data-i18n="hide_symbols_feature_label">Hide KSU SUSFS Symbols</span>
+                            <span class="text-sm" data-i18n="hide_symbols_feature_label">Hide KSU SUSFS Symbols</span>
                             <div id="status_hide_symbols" class="badge badge-warning text-sm ml-4">
                                 <span data-i18n="unknown_label">Unknown</span>
                             </div>
@@ -124,7 +128,7 @@
                         
                         <!-- Magic Mount -->
                         <div class="flex justify-between items-center py-2 px-2">
-                            <span class="text-white text-base" data-i18n="magic_mount_feature_label">Magic Mount Support</span>
+                            <span class="text-sm" data-i18n="magic_mount_feature_label">Magic Mount Support</span>
                             <div id="status_magic_mount" class="badge badge-warning text-sm ml-4">
                                 <span data-i18n="unknown_label">Unknown</span>
                             </div>
@@ -132,16 +136,21 @@
                         
                         <!-- OverlayFS Auto Kstat -->
                         <div class="flex justify-between items-center py-2 px-2">
-                            <span class="text-white text-base" data-i18n="overlayfs_auto_kstat_feature_label">OverlayFS Auto Kstat Support</span>
+                            <span class="text-sm" data-i18n="overlayfs_auto_kstat_feature_label">OverlayFS Auto Kstat Support</span>
                             <div id="status_overlayfs_auto_kstat" class="badge badge-warning text-sm ml-4">
                                 <span data-i18n="unknown_label">Unknown</span>
                             </div>
                         </div>
                     </div>
                 </div>
-                <a href="index.html" class="text-white"><button class="btn btn-outline text-xl bg-cyan-100/30 dark:bg-black/30 backdrop-blur-sm text-white border-white" data-i18n="main_menu_label">Back to main menu</button></a>
             </section>
     </main>
+	<nav class="app-nav">
+		<a href="index.html" data-nav="index.html"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"/></svg><span data-i18n="nav_home_label">Home</span></a>
+		<a href="custom.html" data-nav="custom.html"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 1 1-3 0m3 0a1.5 1.5 0 1 0-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-9.75 0h9.75"/></svg><span data-i18n="nav_settings_label">Settings</span></a>
+		<a href="status.html" data-nav="status.html" id="susfs_kernel_status" class="hidden"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z"/></svg><span data-i18n="nav_status_label">Status</span></a>
+		<a href="credits.html" data-nav="credits.html"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"/></svg><span data-i18n="about_label">About</span></a>
+	</nav>
     <script>
 		// Initialize translations after DOM is loaded
 		document.addEventListener('DOMContentLoaded', () => {

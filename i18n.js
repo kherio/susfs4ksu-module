@@ -171,13 +171,13 @@ async function languageSelect(){
  */
 function createLanguageSelector() {
   const select = document.getElementById('language');
-  
+  if (!select) return;
+
   for (const [code, name] of Object.entries(availableLanguages)) {
     const option = document.createElement('option');
     option.value = code;
     option.textContent = name;
-    option.className= 'text-black dark:text-white dark:bg-black';
-    if (code === currentLanguage) {
+        if (code === currentLanguage) {
       option.selected = true;
     }
     select.appendChild(option);

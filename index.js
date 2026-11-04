@@ -1,7 +1,6 @@
 import { toast } from 'kernelsu';
 import Highway from '@dogstudio/highway';
 import Fade from './fade.js';
-import './space.js';
 import './i18n.js';
 import { show_contributors, show_translators } from './credits.js';
 import { run, catToObject, parseVersion, versionAtLeast } from './src/utils.js';
@@ -85,6 +84,15 @@ if (versionAtLeast(susfs_versions, 1, 5, 4)) {
 	auto_hide_settings(settings, susfs_features, susfs_versions);
 }
 
+// bottom navigation: highlight current page
+function updateNav() {
+	const page = window.location.pathname.split('/').pop() || 'index.html';
+	document.querySelectorAll('.app-nav a').forEach(a => {
+		a.classList.toggle('active', a.dataset.nav === page);
+	});
+}
+updateNav();
+
 //highway transition
 const H = new Highway.Core({
 	transitions: {
@@ -109,6 +117,7 @@ H.on('NAVIGATE_IN', async ({ to, from, trigger, location }) => {
 
 // Re-initialize after page transition
 H.on('NAVIGATE_END', async ({ to, from, trigger, location }) => {
+	updateNav();
 	const settings = catToObject(await run(`cat ${config}/config.sh`));
 	const currentPath = window.location.pathname;
 

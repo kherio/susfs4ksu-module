@@ -1,21 +1,3 @@
-import blue from '/assets/amongus/blue.png';
-import brown from '/assets/amongus/brown.png';
-import cyan from '/assets/amongus/cyan.png';
-import orange from '/assets/amongus/orange.png';
-import yellow from '/assets/amongus/yellow.png';
-import green from '/assets/amongus/green.png';
-import lime from '/assets/amongus/lime.png';
-import pink from '/assets/amongus/pink.png';
-import purple from '/assets/amongus/purple.png';
-import red from '/assets/amongus/red.png';
-import white from '/assets/amongus/white.png';  
-import black from '/assets/amongus/black.png';  
-
-const ICON_PATHS = [
-    blue, brown, cyan, orange, yellow, green,
-    lime, pink, purple, red, white, black
-];
-
 const GITHUB_SVG = `<svg stroke="currentColor" fill="currentColor" stroke-width="0" 
      viewBox="0 0 496 512" class="w-6 h-6 text-gray-400 hover:text-gray-100" 
      height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
@@ -34,11 +16,11 @@ const GITHUB_SVG = `<svg stroke="currentColor" fill="currentColor" stroke-width=
 function createProfileCard({ name, country, character, github }) {
     return `
       <div class="space-y-2 flex-shrink-0">
-        <div class="flex justify-center items-center flex-col space-y-3 text-lg font-medium leading-6">
-          <img src="${ICON_PATHS[character]}" class="w-20 h-25"/>
-          <h3 class="text-white text-xl">${name}</h3>
-          ${country ? `<p class="text-indigo-300 text-xl text-center" style="white-space: pre;">${country}</p>` : ''}
-          <div class="flex justify-center mt-5 space-x-5">
+        <div class="flex justify-center items-center flex-col space-y-3 text-base leading-6">
+          <div class="avatar placeholder"><div class="w-14 rounded-full bg-neutral text-neutral-content"><span class="text-xl">${(name||"?").charAt(0).toUpperCase()}</span></div></div>
+          <h3 class="text-base font-semibold text-base-content">${name}</h3>
+          ${country ? `<p class="text-sm text-base-content/60 text-center" style="white-space: pre;">${country}</p>` : ''}
+          <div class="flex justify-center mt-2 space-x-5">
             <a onclick="ksu.exec(\`am start -a android.intent.action.VIEW -d ${github}\`)" 
                target="_blank" rel="noopener noreferrer"
                class="inline-block text-gray-400">

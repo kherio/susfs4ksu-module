@@ -128,4 +128,9 @@
   <string id="import_config_label">Import Config</string>
   <string id="import_warning_label">Importing a config will overwrite your current settings. Are you sure you want to proceed?</string>
   <string id="import_backup_label">Backup Current Config</string>
+  <string id="nav_home_label">Home</string>
+  <string id="nav_settings_label">Settings</string>
+  <string id="nav_status_label">Status</string>
+  <string id="general_label">General</string>
+  <string id="apply_label">Apply</string>
 </language>

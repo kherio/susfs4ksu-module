@@ -1,53 +1,49 @@
-name: Build and Release
+name: Build WebUI
 
 on:
   push:
+    branches: ['webui']
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
-  build-and-release:
+  build-webui:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout webui branch
         uses: actions/checkout@v4
         with:
-          persist-credentials: false
           ref: webui
+          path: webui-src
 
-      - name: Get latest commit message
-        id: commit_message
+      - name: Build
+        working-directory: webui-src
         run: |
-          COMMIT_MSG=$(git log -1 --pretty=%s)
-          echo "message=$COMMIT_MSG" >> $GITHUB_OUTPUT
+          npm ci || npm install
+          npm run build
 
-      - name: Build webui branch
-        run: |
-           npm install
-           npm run build
-
-      - name: Copy dist folder to a temporary location
-        run: |
-          cp -r dist/ ../dist-temp/
-
-      - name: Checkout v1.5.2+ branch
+      - name: Checkout module branch
         uses: actions/checkout@v4
         with:
-          persist-credentials: false
           ref: v1.5.2+
+          path: module
 
-      - name: Remove old contents from webroot folder
+      - name: Replace webroot with the new build
         run: |
-          rm -rf webroot/*
+          rm -rf module/webroot/*
+          cp -r webui-src/dist/* module/webroot/
 
-      - name: Copy contents from dist-temp to webroot
+      - name: Commit and push
+        working-directory: module
         run: |
-          cp -r ../dist-temp/* webroot/
-
-      - name: Commit & Push changes
-        uses: actions-js/push@master
-        with:
-          github_token: ${{ secrets.SUSFS4KSU_SECRET }}
-          author_email: "24408329+sidex15@users.noreply.github.com"
-          author_name: "sidex15"
-          message: "WebUI: ${{ steps.commit_message.outputs.message }}"
-          branch: 'v1.5.2+'
+          git config user.name "kherio"
+          git config user.email "jvrsanjose@gmail.com"
+          git add -A webroot
+          if git diff --cached --quiet; then
+            echo "Sin cambios en webroot"
+          else
+            git commit -m "WebUI: $(git -C ../webui-src log -1 --pretty=%s)"
+            git push origin v1.5.2+
+          fi
