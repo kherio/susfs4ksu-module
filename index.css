@@ -16,66 +16,69 @@ body, html {
     height: 100%;
 }
 
-/* Section card */
-.panel {
-    @apply w-full rounded-box border border-base-content/10 bg-base-200 p-4;
-}
+@layer components {
+  /* Section card */
+  .panel {
+      @apply w-full rounded-box border border-base-content/10 bg-base-200 p-4;
+  }
 
-.panel-title {
-    @apply mb-1 text-sm font-semibold uppercase tracking-wide text-base-content/60;
-}
+  .panel-title {
+      @apply mb-1 text-sm font-semibold uppercase tracking-wide text-base-content/60;
+  }
 
-.panel-hint {
-    @apply mb-2 text-xs text-base-content/50;
-}
+  .panel-hint {
+      @apply mb-2 text-xs text-base-content/50;
+  }
 
-/* Row with label + control */
-.setting-row {
-    @apply flex items-center justify-between gap-3 py-2;
-}
+  /* Row with label + control */
+  .setting-row {
+      @apply flex items-center justify-between gap-3 py-2;
+  }
 
-.setting-row + .setting-row {
-    @apply border-t border-base-content/5;
-}
+  .setting-row + .setting-row {
+      @apply border-t border-base-content/5;
+  }
 
-.setting-label {
-    @apply text-sm text-base-content;
-}
+  .setting-label {
+      @apply text-sm text-base-content;
+  }
 
-.setting-sub {
-    @apply pl-4 text-xs text-base-content/70;
-}
+  .setting-sub {
+      @apply pl-4 text-xs text-base-content/70;
+  }
 
-/* Bottom navigation */
-.app-nav {
-    @apply fixed bottom-0 left-0 right-0 z-50 flex border-t border-base-content/10 bg-base-200/95 backdrop-blur;
-    padding-bottom: env(safe-area-inset-bottom);
-}
+  /* Bottom navigation */
+  .app-nav {
+      @apply fixed bottom-0 left-0 right-0 z-50 flex border-t border-base-content/10 bg-base-200/95 backdrop-blur;
+      padding-bottom: env(safe-area-inset-bottom);
+  }
 
-.app-nav a {
-    @apply flex flex-1 flex-col items-center gap-0.5 py-2 text-[11px] font-medium text-base-content/55 transition-colors;
-}
+  .app-nav a {
+      @apply flex flex-1 flex-col items-center gap-0.5 py-2 text-[11px] font-medium text-base-content/55 transition-colors;
+  }
 
-.app-nav a svg {
-    @apply h-5 w-5;
-}
+  .app-nav a svg {
+      @apply h-5 w-5;
+  }
 
-.app-nav a.active {
-    @apply text-primary;
-}
+  .app-nav a.active {
+      @apply text-primary;
+  }
 
-.app-nav a.hidden {
-    display: none;
-}
+  .app-nav a.hidden {
+      display: none;
+  }
 
-/* label + control rows used in the settings pages */
-.panel .form-control + .form-control,
-.panel .form-control + div {
-    @apply border-t border-base-content/5;
-}
-.panel .form-control > .label.cursor-pointer {
-    @apply py-2 px-0 gap-3;
-}
-.panel .form-control > .label.cursor-pointer > span {
-    @apply text-sm;
+  /* label + control rows used in the settings pages */
+  .panel .form-control + .form-control,
+  .panel .form-control + div {
+      @apply border-t border-base-content/5;
+  }
+  .panel .form-control > .label.cursor-pointer {
+      @apply py-2 px-0 gap-3;
+  }
+  .panel .form-control > .label.cursor-pointer > span {
+      @apply text-sm;
+  }
+
 }
