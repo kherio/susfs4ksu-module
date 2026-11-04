@@ -1,7 +1,7 @@
 id=susfs4ksu
 name=SUSFS-FOR-KERNELSU (kherio)
-version=v1.5.2-R28-K2
-versionCode=105002030
+version=v1.5.2-R28-K3
+versionCode=105002031
 author=sidex15 & simonpunk (fork: kherio)
 description=An addon root hiding service for KernelSU compiled with patched kernel source.
 updateJson=https://raw.githubusercontent.com/kherio/susfs4ksu-module/v1.5.2+/update.json

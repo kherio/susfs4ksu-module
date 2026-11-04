@@ -1,3 +1,7 @@
+## v1.5.2-R28-K3 (kherio fork)
+* WebUI: fix conditional rows (e.g. "Skip Legit Mounts") showing up when the kernel/version does not support them
+* WebUI: verified every control of the original UI is still present; only the old link buttons moved to the bottom navigation
+
 ## v1.5.2-R28-K2 (kherio fork)
 ### WebUI
 * Removed the animated space background and the crewmate artwork
