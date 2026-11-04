@@ -38,7 +38,7 @@ jobs:
       - name: Build zip
         run: |
           mkdir -p dist
-          zip -qr "dist/susfs4ksu-${VERSION}-${SHORT}.zip" . \
+          zip -qrD "dist/susfs4ksu-${VERSION}-${SHORT}.zip" . \
             -x '.git/*' '.github/*' 'dist/*' 'README.md' 'LICENSE' '.gitignore'
           cp "dist/susfs4ksu-${VERSION}-${SHORT}.zip" dist/susfs4ksu.zip
           unzip -l dist/susfs4ksu.zip | tail -1
