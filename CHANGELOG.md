@@ -1,3 +1,12 @@
+## v1.5.2-R28-K2 (kherio fork)
+### WebUI
+* Removed the animated space background and the crewmate artwork
+* New neutral dark theme with a system font and consistent toggles
+* Persistent bottom navigation (Home / Settings / Status / About) replaces the link buttons; the page you are on is highlighted
+* Home page reorganised into sections: counters, General, Auto hide, Kernel uname, Danger zone
+* Settings, Status and About pages share the same layout; "Make it SuS" buttons are now "Apply"
+* Source lives in the `webui` branch of this fork and is built into `webroot/` by CI
+
 ## v1.5.2-R28-K1 (kherio fork)
 * module.prop/update.json: updateJson and zipUrl now point to kherio/susfs4ksu-module
 * scripts: cloud ksu_susfs binary is only accepted if its sha256 is listed in trusted_hashes.txt
